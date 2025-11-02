@@ -3,38 +3,63 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - chess_knowledge</title>
+    <title>@ViewData["Title"] - Chess Knowledge</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/chess_knowledge.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">chess_knowledge</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    @{ 
+        var areaLinks = new[]
+        {
+            new { Title = "Introduction", Area = "Introduction" },
+            new { Title = "Tactics", Area = "Tactics" },
+            new { Title = "Calculation & Visualization", Area = "CalculationVisualization" },
+            new { Title = "Positional Understanding", Area = "PositionalUnderstanding" },
+            new { Title = "Strategy & Planning", Area = "StrategyPlanning" },
+            new { Title = "Attack", Area = "Attack" },
+            new { Title = "Defence", Area = "Defence" },
+            new { Title = "Endgames", Area = "Endgames" },
+            new { Title = "Openings", Area = "Openings" },
+            new { Title = "Psychological Skills", Area = "PsychologicalSkills" },
+            new { Title = "Intuition & Pattern Recognition", Area = "IntuitionPatternRecognition" },
+            new { Title = "Evaluation & Decision Making", Area = "EvaluationDecisionMaking" },
+            new { Title = "Study & Improvement Methods", Area = "StudyImprovementMethods" }
+        };
+
+        var currentArea = ViewContext.RouteData.Values["area"] as string ?? string.Empty;
+        var currentPage = ViewContext.RouteData.Values["page"] as string ?? string.Empty;
+    }
+
+    <header class="topbar border-bottom mb-3">
+        <div class="container d-flex justify-content-between align-items-center py-3">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">Chess Knowledge</a>
+            <a class="nav-link text-muted" asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+    <div class="layout-shell">
+        <nav class="sidebar" aria-label="Primary">
+            <h2 class="sidebar-title">Learn Chess</h2>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item @(string.IsNullOrEmpty(currentArea) && string.Equals(currentPage, "/Index", System.StringComparison.OrdinalIgnoreCase) ? "active" : null)">
+                    <a class="sidebar-link" asp-area="" asp-page="/Index">Home</a>
+                </li>
+                @foreach (var item in areaLinks)
+                {
+                    var isActive = string.Equals(currentArea, item.Area, System.StringComparison.OrdinalIgnoreCase);
+                    <li class="sidebar-item @(isActive ? "active" : null)">
+                        <a class="sidebar-link" asp-area="@item.Area" asp-page="/Index">@item.Title</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+        <div class="content-column">
+            <main role="main" class="content-main">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
