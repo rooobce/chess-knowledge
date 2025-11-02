@@ -1,0 +1,30 @@
+# Build output
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Temporary
+~$*
+*.tmp
+*.swp
