@@ -94,3 +94,4 @@
 /Users/joberr-mac/Developer/chess/chess-knowledge/obj/Debug/net9.0/chess-knowledge.pdb
 /Users/joberr-mac/Developer/chess/chess-knowledge/obj/Debug/net9.0/chess-knowledge.genruntimeconfig.cache
 /Users/joberr-mac/Developer/chess/chess-knowledge/obj/Debug/net9.0/ref/chess-knowledge.dll
+/Users/joberr-mac/Developer/chess/chess-knowledge/obj/Debug/net9.0/chess-knowledge.sourcelink.json
